@@ -55,22 +55,22 @@ The pipeline processes CICIDS2017 network traffic data, extracts 78 flow-based f
     └──────────┬──────────┘ └────────┬──────────────┘
                │                      │
     ┌──────────▼──────────────────────▼──────────────┐
-    │              DETECTION ENGINE                   │
-    │  DetectionEngine → DetectionOrchestrator        │
+    │              DETECTION ENGINE                  │
+    │  DetectionEngine → DetectionOrchestrator       │
     │  • detect_batch() • process_dataframe()        │
     └──────────┬──────────────────────┬──────────────┘
                │                      │
     ┌──────────▼──────────┐ ┌────────▼──────────────┐
-    │  STREAMING SIMULATOR│ │    ALERT SYSTEM        │
-    │  • stream_from_df() │ │    • AlertGenerator    │
-    │  • generate_traffic │ │    • AlertLogger       │
+    │  STREAMING SIMULATOR│ │    ALERT SYSTEM       │
+    │  • stream_from_df() │ │    • AlertGenerator   │
+    │  • generate_traffic │ │    • AlertLogger      │
     └─────────────────────┘ └───────────────────────┘
                │                      │
     ┌──────────▼──────────────────────▼──────────────┐
-    │           EVALUATION & REPORTING                │
-    │  PerformanceEvaluator • LatencyTracker          │
-    │  ThroughputTracker • Experiment Reports          │
-    └──┘
+    │           EVALUATION & REPORTING               │
+    │  PerformanceEvaluator • LatencyTracker         │
+    │  ThroughputTracker • Experiment Reports        │
+    └────────────────────────────────────────────────┘
 ```
 
 ---
@@ -372,67 +372,6 @@ python -m pytest tests/ -o "addopts=" --tb=short -v
 
 ---
 
-## Project Structure
-
-```
-zero-day-dos-detection-engine/
-├── src/                          # Source code
-│   ├── anomaly_detection/        # Isolation Forest model
-│   │   ├── isolation_forest.py   # IsolationForestModel dataclass
-│   │   ├── trainer.py            # train_anomaly_detector()
-│   │   └── evaluator.py          # evaluate_anomaly_model()
-│   ├── classification/           # Random Forest classifier
-│   │   ├── random_forest.py      # RandomForestClassifierModel class
-│   │   ├── trainer.py            # train_classifier()
-│   │   └── evaluator.py          # evaluate_classification_model()
-│   ├── detection_engine/         # Detection pipeline
-│   │   ├── engine.py             # DetectionEngine class
-│   │   └── orchestrator.py       # DetectionOrchestrator class
-│   ├── streaming/                # Real-time simulation
-│   │   └── simulator.py          # StreamSimulator class
-│   ├── evaluation/               # Metrics and reporting
-│   │   ├── metrics.py            # PerformanceEvaluator class
-│   │   ├── reports.py            # generate_experiment_report()
-│   │   ├── latency.py            # LatencyTracker class
-│   │   └── throughput.py         # ThroughputTracker class
-│   ├── alerting/                 # Alert system
-│   │   ├── generator.py          # AlertGenerator class
-│   │   └── logger.py             # AlertLogger class
-│   ├── dashboard/                # Streamlit dashboard
-│   │   └── app.py                # Dashboard application
-│   ├── preprocessing/            # Data preprocessing
-│   │   ├── cleaner.py            # Data cleaning
-│   │   ├── encoder.py            # Label encoding
-│   │   └── splitter.py           # Train/test split
-│   ├── features/                 # Feature engineering
-│   │   ├── extractor.py          # Feature extraction
-│   │   └── selector.py           # Feature selection
-│   ├── core/                     # Core utilities
-│   │   ├── config.py             # ConfigLoader, get_config()
-│   │   ├── constants.py          # Path constants
-│   │   └── exceptions.py         # Custom exceptions
-│   └── utils/                    # Utility functions
-│       ├── model_utils.py        # save_model(), load_model()
-│       └── file_utils.py         # File operations
-├── scripts/                      # Runnable scripts
-├── tests/                        # Test suite (765+ tests)
-├── config/                       # YAML configuration
-│   ├── settings.yaml             # Main settings
-│   ├── paths.yaml                # Path configuration
-│   ├── models.yaml               # Model hyperparameters
-│   └── thresholds.yaml           # Detection thresholds
-├── data/                         # Dataset files
-│   ├── raw/cicids2017/           # Raw CICIDS2017 CSVs
-│   └── processed/                # Preprocessed data
-├── models/                       # Trained models
-│   └── trained/                  # Serialized model files
-├── reports/                      # Generated reports
-├── logs/                         # Application logs
-├── pyproject.toml                # Project metadata
-├── PROJECT_DOCUMENT.md           # Academic project document
-├── EXECUTION_STATE.md            # Agent execution state
-├── MEMORY.md                     # Agent memory
-└── BACKLOG.md                    # Task backlog
 ```
 
 ---
