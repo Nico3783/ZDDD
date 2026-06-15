@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-06-12T00:00:00.000Z" agent="drawio" version="24.0.0" type="device">
+  <diagram id="deployment-architecture" name="Deployment Architecture">
+    <mxGraphModel dx="2200" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ============================================================ -->
+        <!-- TITLE                                                        -->
+        <!-- ============================================================ -->
+        <mxCell id="title" value="Deployment Architecture — Zero-Day DoS Detection Engine" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="550" y="20" width="700" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="Local Development · Docker · Systemd · CI/CD · Monitoring" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="620" y="55" width="560" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- OUTER CONTAINER: Deployment Environment                       -->
+        <!-- ============================================================ -->
+        <mxCell id="outer_box" value="Deployment Environment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=2;fontSize=16;fontStyle=1;fontColor=#333333;verticalAlign=top;align=left;spacingLeft=12;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="1680" height="1050" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LOCAL DEVELOPMENT (light blue)                                -->
+        <!-- ============================================================ -->
+        <mxCell id="dev_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="480" height="420" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_title" value="🖥️  Local Development" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="100" y="170" width="260" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Python venv -->
+        <mxCell id="dev_venv" value="🐍  Python 3.13 Virtual Environment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="110" y="210" width="420" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_venv_note" value="python -m venv .venv  &amp;  source .venv/bin/activate" style="text;html=1;align=center;fontSize=9;fontColor=#555555;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="110" y="242" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- pip install -->
+        <mxCell id="dev_pip" value="📦  pip install -e &quot;.[dev]&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="110" y="275" width="420" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_pip_note" value="Editable install with dev dependencies (pytest, ruff, mypy)" style="text;html=1;align=center;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="110" y="302" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Source layout -->
+        <mxCell id="dev_src" value="📁  src/          Core Python modules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="330" width="200" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_config" value="⚙️  config/       YAML configuration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="372" width="200" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_models" value="🧠  models/       Trained ML models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="330" width="200" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_data" value="💾  data/         CSV datasets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="372" width="200" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Dev run command -->
+        <mxCell id="dev_run" value="▶  streamlit run src/dashboard/app.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f4fd;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;fontFamily=Courier New;align=center;" vertex="1" parent="1">
+          <mxGeometry x="110" y="420" width="420" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="dev_run_note" value="http://localhost:8501" style="text;html=1;align=center;fontSize=9;fontColor=#555555;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="110" y="448" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Dev features list -->
+        <mxCell id="dev_features" value="• Hot-reload on code changes&#xa;• Full debugger support&#xa;• Direct filesystem access&#xa;• No container overhead" style="text;html=1;align=left;verticalAlign=top;fontSize=9;fontColor=#555555;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="470" width="420" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DOCKER DEPLOYMENT (light cyan)                                -->
+        <!-- ============================================================ -->
+        <mxCell id="docker_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f3ff;strokeColor=#0077cc;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="600" y="160" width="480" height="420" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_title" value="🐳  Docker Deployment" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="620" y="170" width="260" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Dockerfile -->
+        <mxCell id="docker_dockerfile" value="📄  Dockerfile" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="630" y="210" width="420" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_dockerfile_note" value="FROM python:3.13-slim  |  WORKDIR /app" style="text;html=1;align=center;fontSize=9;fontColor=#555555;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="630" y="238" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- docker-compose.yml -->
+        <mxCell id="docker_compose" value="📄  docker-compose.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="630" y="265" width="420" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_compose_note" value="Orchestrates services, volumes, and networking" style="text;html=1;align=center;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="630" y="293" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- Container -->
+        <mxCell id="docker_container" value="📦  Container: dos-detection-engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4e8f7;strokeColor=#0077cc;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="630" y="318" width="420" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Port -->
+        <mxCell id="docker_port" value="🔌  Port 8501 → localhost:8501  (Streamlit UI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=10;fontFamily=Courier New;align=center;" vertex="1" parent="1">
+          <mxGeometry x="630" y="368" width="420" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Volumes -->
+        <mxCell id="docker_vol_title" value="Bind Mount Volumes:" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="640" y="405" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_vol1" value="📁  config/    →  /app/config" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="640" y="428" width="200" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_vol2" value="🧠  models/   →  /app/models" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="640" y="460" width="200" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_vol3" value="💾  data/      →  /app/data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="640" y="492" width="200" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="docker_vol4" value="📋  logs/       →  /app/logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0077cc;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="640" y="524" width="200" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- Docker commands -->
+        <mxCell id="docker_cmds" value="docker compose up -d  |  docker compose logs -f" style="text;html=1;align=center;fontSize=9;fontColor=#0077cc;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="630" y="558" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- SYSTEMD SERVICE (light green)                                 -->
+        <!-- ============================================================ -->
+        <mxCell id="systemd_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#6c8ebf;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="160" width="560" height="420" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_title" value="🔧  Systemd Service" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="170" width="260" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Service file -->
+        <mxCell id="systemd_service_file" value="📄  /etc/systemd/system/detection-engine.service" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4caf50;fontSize=10;fontStyle=1;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="210" width="520" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Unit section -->
+        <mxCell id="systemd_unit_title" value="[Unit]" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="255" width="80" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_unit" value="Description=Zero-Day DoS Detection Engine&#xa;After=network.target" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="275" width="240" height="42" as="geometry"/>
+        </mxCell>
+
+        <!-- Service section -->
+        <mxCell id="systemd_svc_title" value="[Service]" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="255" width="100" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_svc" value="User=nick&#xa;WorkingDirectory=/home/nick/Documents/Projects/Zion/zero-day-dos-detection-engine&#xa;ExecStart=/home/nick/.venv/bin/streamlit run src/dashboard/app.py&#xa;Restart=on-failure&#xa;RestartSec=5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="330" width="520" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Install section -->
+        <mxCell id="systemd_install_title" value="[Install]" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="430" width="80" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_install" value="WantedBy=multi-user.target" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="450" width="240" height="28" as="geometry"/>
+        </mxCell>
+
+        <!-- Systemd commands -->
+        <mxCell id="systemd_cmds" value="Commands:" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="488" width="100" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_cmd1" value="sudo systemctl daemon-reload" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="508" width="240" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_cmd2" value="sudo systemctl enable detection-engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="508" width="260" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_cmd3" value="sudo systemctl start detection-engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="536" width="240" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="systemd_cmd4" value="sudo systemctl status detection-engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4caf50;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="536" width="260" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- CI/CD SIDE PANEL (light purple)                               -->
+        <!-- ============================================================ -->
+        <mxCell id="cicd_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="620" width="600" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_title" value="🔄  CI/CD — GitHub Actions" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="100" y="630" width="300" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- GitHub trigger -->
+        <mxCell id="cicd_trigger" value="🐙  GitHub Repository: push / pull_request / release" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="110" y="670" width="560" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Pipeline 1: tests.yml -->
+        <mxCell id="cicd_p1_title" value="Pipeline 1: tests.yml" style="text;html=1;align=left;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="110" y="720" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_p1" value="📄  .github/workflows/tests.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="742" width="560" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_p1_detail" value="Trigger: push, pull_request&#xa;Runner: ubuntu-latest&#xa;Steps: checkout → setup-python 3.13 → pip install -e &quot;.[dev]&quot; → pytest --tb=short -q" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#9673a6;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="775" width="560" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Pipeline 2: lint.yml -->
+        <mxCell id="cicd_p2_title" value="Pipeline 2: lint.yml" style="text;html=1;align=left;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="110" y="845" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_p2" value="📄  .github/workflows/lint.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="867" width="560" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_p2_detail" value="Trigger: push, pull_request&#xa;Steps: checkout → setup-python 3.13 → pip install ruff → ruff format --check . → ruff check ." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#9673a6;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="900" width="560" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- Pipeline 3: build.yml -->
+        <mxCell id="cicd_p3_title" value="Pipeline 3: build.yml" style="text;html=1;align=left;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="110" y="960" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_p3" value="📄  .github/workflows/build.yml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="982" width="560" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="cicd_p3_detail" value="Trigger: release (published)&#xa;Steps: checkout → setup-python 3.13 → pip install build → python -m build → upload artifact" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#9673a6;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="110" y="1015" width="560" height="45" as="geometry"/>
+        </mxCell>
+
+        <!-- CI/CD status badges -->
+        <mxCell id="cicd_badges" value="Status:  ✅ tests | ✅ lint | 🏗️ build" style="text;html=1;align=left;fontSize=10;fontColor=#333333;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="1072" width="300" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- MONITORING STACK (light orange)                               -->
+        <!-- ============================================================ -->
+        <mxCell id="monitor_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="720" y="620" width="460" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="monitor_title" value="📊  Monitoring Stack" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="740" y="630" width="260" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Prometheus -->
+        <mxCell id="prom_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;strokeWidth=1;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="740" y="670" width="420" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="prom_title" value="🔥  Prometheus" style="text;html=1;align=left;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="760" y="678" width="200" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="prom_config" value="Scrape interval: 15s&#xa;Target: localhost:8501/metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontSize=10;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="760" y="702" width="380" height="38" as="geometry"/>
+        </mxCell>
+        <mxCell id="prom_yaml" value="prometheus.yml:" style="text;html=1;align=left;fontSize=9;fontStyle=1;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="760" y="746" width="150" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="prom_yaml_detail" value="scrape_configs:&#xa;  - job_name: 'detection-engine'&#xa;    static_configs:&#xa;      - targets: ['localhost:8501']" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="760" y="763" width="380" height="38" as="geometry"/>
+        </mxCell>
+
+        <!-- Grafana -->
+        <mxCell id="grafana_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="740" y="825" width="420" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="grafana_title" value="📈  Grafana (Optional)" style="text;html=1;align=left;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="760" y="833" width="260" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="grafana_note" value="Dashboard visualization for anomaly metrics" style="text;html=1;align=left;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="760" y="856" width="300" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="grafana_config" value="Data source: Prometheus (localhost:9090)&#xa;Dashboard panels:&#xa;  • Anomaly detection rate&#xa;  • False positive / negative ratio&#xa;  • Traffic volume over time" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="760" y="878" width="380" height="58" as="geometry"/>
+        </mxCell>
+
+        <!-- Alerting -->
+        <mxCell id="alert_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="740" y="960" width="420" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="alert_title" value="🚨  Alerting (Future)" style="text;html=1;align=left;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="760" y="968" width="260" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="alert_note" value="Prometheus AlertManager integration" style="text;html=1;align=left;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="760" y="991" width="300" height="16" as="geometry"/>
+        </mxCell>
+        <mxCell id="alert_config" value="Alert rules:&#xa;  • high_anomaly_rate: rate(anomalies_total[5m]) &gt; 0.1&#xa;  • service_down: up{job=&quot;detection-engine&quot;} == 0&#xa;  • high_memory: process_resident_memory_bytes &gt; 2GB&#xa;Notifications: email, Slack webhook" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9e6;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1013" width="380" height="68" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- DATA SOURCES (light yellow)                                   -->
+        <!-- ============================================================ -->
+        <mxCell id="data_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="620" width="460" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_title" value="💾  Data Sources" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="630" width="260" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- CICIDS2017 -->
+        <mxCell id="data_cicids" value="📁  CICIDS2017 Dataset" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="670" width="420" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_cicids_note" value="Canadian Institute for Cybersecurity Intrusion Detection System" style="text;html=1;align=center;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="698" width="420" height="16" as="geometry"/>
+        </mxCell>
+
+        <!-- File structure -->
+        <mxCell id="data_files_title" value="Local CSV Files:" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="725" width="150" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_file1" value="📄  data/mondayWorkingHours.pcap_ISCX.csv" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="748" width="400" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_file2" value="📄  data/tuesdayWorkingHours.pcap_ISCX.csv" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="778" width="400" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_file3" value="📄  data/wednesdayWorkingHours.pcap_ISCX.csv" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="808" width="400" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_file4" value="📄  data/thursdayWorkingHours-*.csv  (2 files)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="838" width="400" height="26" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_file5" value="📄  data/fridayWorkingHours.pcap_ISCX.csv" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="868" width="400" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- Attack types -->
+        <mxCell id="data_attacks_title" value="Attack Types in Dataset:" style="text;html=1;align=left;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="910" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_attacks" value="DDoS, DoS Hulk, DoS GoldenEye, DoS Slowloris,&#xa;PortScan, FTP-Patator, SSH-Patator,&#xa;Web Attack (Brute Force, XSS, SQL Injection)," style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="932" width="400" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="data_attacks2" value="Infiltration, Heartbleed, Botnet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffff0;strokeColor=#d6b656;fontSize=9;fontFamily=Courier New;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="985" width="400" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Data stats -->
+        <mxCell id="data_stats" value="~2.8M rows  |  80 features  |  14 attack types  |  5 days of traffic" style="text;html=1;align=center;fontSize=10;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="1025" width="420" height="18" as="geometry"/>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROWS — Relationships                                       -->
+        <!-- ============================================================ -->
+
+        <!-- Development → Docker (shared config) -->
+        <mxCell id="arrow_dev_docker" value="shared config &amp; models" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#6c8ebf;strokeWidth=1.5;fontSize=8;fontColor=#6c8ebf;dashed=1;" edge="1" parent="1" source="dev_box" target="docker_box">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Docker → Systemd (same project) -->
+        <mxCell id="arrow_docker_systemd" value="alternative deploy" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#4caf50;strokeWidth=1.5;fontSize=8;fontColor=#4caf50;dashed=1;" edge="1" parent="1" source="docker_box" target="systemd_box">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- CI/CD → Docker (build image) -->
+        <mxCell id="arrow_cicd_docker" value="builds Docker image" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=1.5;fontSize=8;fontColor=#9673a6;" edge="1" parent="1" source="cicd_box" target="docker_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="545"/>
+              <mxPoint x="840" y="545"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CI/CD → Development (tests source) -->
+        <mxCell id="arrow_cicd_dev" value="tests source code" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#9673a6;strokeWidth=1.5;fontSize=8;fontColor=#9673a6;" edge="1" parent="1" source="cicd_box" target="dev_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="615"/>
+              <mxPoint x="320" y="585"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Monitoring → Docker (scrape metrics) -->
+        <mxCell id="arrow_monitor_docker" value="scrapes /metrics" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=1.5;fontSize=8;fontColor=#d6b656;" edge="1" parent="1" source="monitor_box" target="docker_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="615"/>
+              <mxPoint x="1085" y="615"/>
+              <mxPoint x="1085" y="370"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data → Docker (volume mount) -->
+        <mxCell id="arrow_data_docker" value="mounted as volume" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=1.5;fontSize=8;fontColor=#d6b656;" edge="1" parent="1" source="data_box" target="docker_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="615"/>
+              <mxPoint x="1450" y="590"/>
+              <mxPoint x="1085" y="590"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Data → Development (local read) -->
+        <mxCell id="arrow_data_dev" value="read by model" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;strokeColor=#d6b656;strokeWidth=1.5;fontSize=8;fontColor=#d6b656;dashed=1;" edge="1" parent="1" source="data_box" target="dev_box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1220" y="1125"/>
+              <mxPoint x="320" y="1125"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

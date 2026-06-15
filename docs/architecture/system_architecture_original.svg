@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 720" font-family="'Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.10"/>
+    </filter>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00e5ff" flood-opacity="0.25"/>
+    </filter>
+    <linearGradient id="gData" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <linearGradient id="gProcess" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dcfce7"/>
+      <stop offset="100%" stop-color="#bbf7d0"/>
+    </linearGradient>
+    <linearGradient id="gML" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ede9fe"/>
+      <stop offset="100%" stop-color="#ddd6fe"/>
+    </linearGradient>
+    <linearGradient id="gStream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="100%" stop-color="#fed7aa"/>
+    </linearGradient>
+    <linearGradient id="gOutput" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef2f2"/>
+      <stop offset="100%" stop-color="#fecaca"/>
+    </linearGradient>
+    <linearGradient id="gAlert" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fefce8"/>
+      <stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 6" refX="9" refY="3" markerWidth="8" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1440" height="720" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="720" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b" letter-spacing="0.5">System Architecture — Real-Time Zero-Day DoS Detection Engine</text>
+  <line x1="320" y1="52" x2="1120" y2="52" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Row Labels -->
+  <text x="30" y="138" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b" letter-spacing="1" transform="rotate(-90, 30, 138)">BATCH TRAINING</text>
+  <text x="30" y="500" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b" letter-spacing="1" transform="rotate(-90, 30, 500)">REAL-TIME DETECTION</text>
+
+  <!-- Divider -->
+  <line x1="60" y1="340" x2="1380" y2="340" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="6,4"/>
+  <rect x="660" y="332" width="120" height="16" rx="4" fill="#f8fafc"/>
+  <text x="720" y="344" text-anchor="middle" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="1">TRAINED MODELS</text>
+
+  <!-- ═══════════════ BATCH ROW (top) ═══════════════ -->
+
+  <!-- Raw Data -->
+  <rect x="100" y="80" width="180" height="110" rx="10" fill="url(#gData)" stroke="#7dd3fc" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="190" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">Raw Data</text>
+  <text x="190" y="128" text-anchor="middle" font-size="9" fill="#0284c7">CICIDS2017</text>
+  <text x="190" y="143" text-anchor="middle" font-size="8" fill="#0ea5e9">Wednesday PCAP</text>
+  <text x="190" y="158" text-anchor="middle" font-size="8" fill="#0ea5e9">693,270 flows · 84 features</text>
+  <text x="190" y="173" text-anchor="middle" font-size="8" fill="#0ea5e9">BENIGN, DoS Hulk, GoldenEye</text>
+  <text x="190" y="185" text-anchor="middle" font-size="8" fill="#0ea5e9">Slowloris, Slowhttptest, Heartbleed</text>
+
+  <!-- Data Preprocessing -->
+  <rect x="380" y="80" width="180" height="110" rx="10" fill="url(#gProcess)" stroke="#86efac" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="470" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Preprocessing</text>
+  <text x="470" y="128" text-anchor="middle" font-size="9" fill="#16a34a">5-Stage Pipeline</text>
+  <text x="470" y="145" text-anchor="middle" font-size="8" fill="#22c55e">1. Drop NaN rows/cols</text>
+  <text x="470" y="158" text-anchor="middle" font-size="8" fill="#22c55e">2. Remove inf + duplicates</text>
+  <text x="470" y="171" text-anchor="middle" font-size="8" fill="#22c55e">3. Label encode + binary labels</text>
+  <text x="470" y="184" text-anchor="middle" font-size="8" fill="#22c55e">4. StandardScaler (μ=0, σ=1)</text>
+  <text x="470" y="197" text-anchor="middle" font-size="8" fill="#22c55e">5. Feature selection (top 30)</text>
+
+  <!-- Arrow: Data → Preprocessing -->
+  <line x1="285" y1="135" x2="375" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Feature Selection -->
+  <rect x="660" y="80" width="180" height="110" rx="10" fill="url(#gProcess)" stroke="#86efac" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="750" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">Feature Selection</text>
+  <text x="750" y="128" text-anchor="middle" font-size="9" fill="#16a34a">Correlation + MI + Mutual Info</text>
+  <text x="750" y="145" text-anchor="middle" font-size="8" fill="#22c55e">30 selected features:</text>
+  <text x="750" y="158" text-anchor="middle" font-size="7.5" fill="#22c55e">Flow Duration, Fwd/Bwd Pkts</text>
+  <text x="750" y="171" text-anchor="middle" font-size="7.5" fill="#22c55e">Fwd/Bwd Bytes, ACK/SYN Flags</text>
+  <text x="750" y="184" text-anchor="middle" font-size="7.5" fill="#22c55e">PSH Ratio, Active/Idle Mean</text>
+
+  <!-- Arrow: Preprocessing → Feature Selection -->
+  <line x1="565" y1="135" x2="655" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Isolation Forest -->
+  <rect x="940" y="80" width="180" height="110" rx="10" fill="url(#gML)" stroke="#c4b5fd" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="1030" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Isolation Forest</text>
+  <text x="1030" y="128" text-anchor="middle" font-size="9" fill="#7c3aed">Anomaly Detection (Unsupervised)</text>
+  <text x="1030" y="145" text-anchor="middle" font-size="8" fill="#8b5cf6">n_estimators=200</text>
+  <text x="1030" y="158" text-anchor="middle" font-size="8" fill="#8b5cf6">contamination=0.1</text>
+  <text x="1030" y="171" text-anchor="middle" font-size="8" fill="#8b5cf6">Threshold: 95th percentile</text>
+  <text x="1030" y="184" text-anchor="middle" font-size="8" fill="#8b5cf6">Accuracy: 94.1% · AUC: 0.953</text>
+
+  <!-- Arrow: Feature Selection → IF -->
+  <line x1="845" y1="135" x2="935" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Random Forest -->
+  <rect x="940" y="210" width="180" height="90" rx="10" fill="url(#gML)" stroke="#c4b5fd" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="1030" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#6d28d9">Random Forest</text>
+  <text x="1030" y="253" text-anchor="middle" font-size="9" fill="#7c3aed">Multi-class Classification</text>
+  <text x="1030" y="270" text-anchor="middle" font-size="8" fill="#8b5cf6">n_estimators=150 · max_depth=20</text>
+  <text x="1030" y="283" text-anchor="middle" font-size="8" fill="#8b5cf6">Balanced weights · Gini · Acc: 95.8%</text>
+
+  <!-- Arrow: Feature Selection → RF (diagonal down) -->
+  <path d="M845,155 Q890,180 935,245" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrow: IF → RF -->
+  <line x1="1030" y1="195" x2="1030" y2="205" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+  <!-- Train Data split label -->
+  <text x="1300" y="155" text-anchor="middle" font-size="8" font-weight="600" fill="#94a3b8">Train 80%</text>
+  <text x="1300" y="168" text-anchor="middle" font-size="8" font-weight="600" fill="#94a3b8">Test 20%</text>
+
+  <!-- ═══════════════ REAL-TIME ROW (bottom) ═══════════════ -->
+
+  <!-- Live Network Data -->
+  <rect x="100" y="380" width="160" height="90" rx="10" fill="url(#gData)" stroke="#7dd3fc" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="180" y="408" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">Live Data</text>
+  <text x="180" y="426" text-anchor="middle" font-size="9" fill="#0284c7">CSV / Packet Capture</text>
+  <text x="180" y="443" text-anchor="middle" font-size="8" fill="#0ea5e9">Row-by-row streaming</text>
+  <text x="180" y="458" text-anchor="middle" font-size="8" fill="#0ea5e9">100× simulation speed</text>
+
+  <!-- Micro-batch Processor -->
+  <rect x="340" y="380" width="160" height="90" rx="10" fill="url(#gStream)" stroke="#fdba74" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="420" y="408" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Micro-Batch</text>
+  <text x="420" y="426" text-anchor="middle" font-size="9" fill="#ea580c">MicroBatchProcessor</text>
+  <text x="420" y="443" text-anchor="middle" font-size="8" fill="#f97316">Batch size: 32 samples</text>
+  <text x="420" y="458" text-anchor="middle" font-size="8" fill="#f97316">Timeout: 100ms</text>
+
+  <!-- Arrow: Live → Micro-batch -->
+  <line x1="265" y1="425" x2="335" y2="425" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Detection Engine -->
+  <rect x="580" y="380" width="200" height="110" rx="10" fill="url(#gOutput)" stroke="#fca5a5" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="680" y="408" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">Detection Engine</text>
+  <text x="680" y="426" text-anchor="middle" font-size="9" fill="#dc2626">DetectionOrchestrator</text>
+  <text x="680" y="443" text-anchor="middle" font-size="8" fill="#ef4444">1. IF anomaly scoring</text>
+  <text x="680" y="456" text-anchor="middle" font-size="8" fill="#ef4444">2. RF multi-class classify</text>
+  <text x="680" y="469" text-anchor="middle" font-size="8" fill="#ef4444">3. Severity: C / H / M / L</text>
+  <text x="680" y="482" text-anchor="middle" font-size="8" fill="#ef4444">4. Zero-day flagging (+0.2)</text>
+
+  <!-- Arrow: Micro-batch → Engine -->
+  <line x1="505" y1="425" x2="575" y2="425" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Alert System -->
+  <rect x="860" y="380" width="160" height="90" rx="10" fill="url(#gAlert)" stroke="#fde047" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="940" y="408" text-anchor="middle" font-size="12" font-weight="700" fill="#854d0e">Alert System</text>
+  <text x="940" y="426" text-anchor="middle" font-size="9" fill="#a16207">AlertLogger + Generator</text>
+  <text x="940" y="443" text-anchor="middle" font-size="8" fill="#ca8a04">JSONL + CSV output</text>
+  <text x="940" y="458" text-anchor="middle" font-size="8" fill="#ca8a04">Rate limit: 60/min</text>
+
+  <!-- Arrow: Engine → Alert -->
+  <line x1="785" y1="425" x2="855" y2="425" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Streamlit Dashboard -->
+  <rect x="1080" y="380" width="180" height="90" rx="10" fill="url(#gData)" stroke="#7dd3fc" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="1170" y="408" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">Dashboard</text>
+  <text x="1170" y="426" text-anchor="middle" font-size="9" fill="#0284c7">Streamlit · Tactical HUD</text>
+  <text x="1170" y="443" text-anchor="middle" font-size="8" fill="#0ea5e9">Overview · Alerts · Metrics</text>
+  <text x="1170" y="458" text-anchor="middle" font-size="8" fill="#0ea5e9">Models · Dark theme</text>
+
+  <!-- Arrow: Alert → Dashboard -->
+  <line x1="1025" y1="425" x2="1075" y2="425" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow from trained models down -->
+  <line x1="1030" y1="305" x2="1030" y2="375" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="1030" y="345" text-anchor="middle" font-size="7" fill="#94a3b8">load models</text>
+
+  <!-- Key Metrics Bar -->
+  <rect x="100" y="520" width="1160" height="50" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1" filter="url(#shadow)"/>
+  <text x="160" y="550" text-anchor="middle" font-size="10" font-weight="600" fill="#475569" letter-spacing="0.5">ZERO-DAY DETECTION</text>
+  <text x="370" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">86.3%</text>
+  <text x="370" y="558" text-anchor="middle" font-size="8" fill="#64748b">detection rate</text>
+  <text x="520" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">4.1% FPR</text>
+  <text x="520" y="558" text-anchor="middle" font-size="8" fill="#64748b">false positive</text>
+  <text x="680" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3aed">42ms</text>
+  <text x="680" y="558" text-anchor="middle" font-size="8" fill="#64748b">mean latency</text>
+  <text x="830" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#c2410c">1,247</text>
+  <text x="830" y="558" text-anchor="middle" font-size="8" fill="#64748b">flows/s</text>
+  <text x="990" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">95.8%</text>
+  <text x="990" y="558" text-anchor="middle" font-size="8" fill="#64748b">RF accuracy</text>
+  <text x="1150" y="543" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3aed">0.953</text>
+  <text x="1150" y="558" text-anchor="middle" font-size="8" fill="#64748b">IF AUC</text>
+
+  <!-- Legend -->
+  <rect x="100" y="590" width="1160" height="32" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8"/>
+  <rect x="120" y="599" width="10" height="10" rx="2" fill="#bae6fd" stroke="#7dd3fc" stroke-width="0.5"/>
+  <text x="136" y="609" font-size="8" fill="#64748b">Data</text>
+  <rect x="180" y="599" width="10" height="10" rx="2" fill="#bbf7d0" stroke="#86efac" stroke-width="0.5"/>
+  <text x="196" y="609" font-size="8" fill="#64748b">Preprocessing</text>
+  <rect x="276" y="599" width="10" height="10" rx="2" fill="#ddd6fe" stroke="#c4b5fd" stroke-width="0.5"/>
+  <text x="292" y="609" font-size="8" fill="#64748b">ML Models</text>
+  <rect x="362" y="599" width="10" height="10" rx="2" fill="#fed7aa" stroke="#fdba74" stroke-width="0.5"/>
+  <text x="378" y="609" font-size="8" fill="#64748b">Streaming</text>
+  <rect x="442" y="599" width="10" height="10" rx="2" fill="#fecaca" stroke="#fca5a5" stroke-width="0.5"/>
+  <text x="458" y="609" font-size="8" fill="#64748b">Detection</text>
+  <rect x="522" y="599" width="10" height="10" rx="2" fill="#fef08a" stroke="#fde047" stroke-width="0.5"/>
+  <text x="538" y="609" font-size="8" fill="#64748b">Alerts</text>
+  <line x1="598" y1="604" x2="622" y2="604" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="632" y="609" font-size="8" fill="#64748b">Data flow</text>
+  <line x1="700" y1="604" x2="724" y2="604" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="734" y="609" font-size="8" fill="#64748b">Model loading</text>
+
+</svg>

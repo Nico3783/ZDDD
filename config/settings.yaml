@@ -1,0 +1,49 @@
+environment: "development"
+seed: 42
+verbose: true
+
+streaming:
+  enabled: true
+  replay_rate: 100
+  batch_size: 32
+  max_streaming_samples: 100000
+  source: "dataset"
+  loop: false
+
+pipeline:
+  preprocessing:
+    enabled: true
+    test_size: 0.2
+    val_size: 0.1
+    random_state: 42
+    drop_duplicates: true
+    handle_missing: "drop"
+  feature_engineering:
+    enabled: true
+    selected_features: null
+    interaction_features: false
+  anomaly_detection:
+    enabled: true
+    train_on_benign_only: true
+  classification:
+    enabled: true
+    threshold_optimization: "roc"
+  alerting:
+    enabled: true
+    log_to_file: true
+    log_to_console: false
+  evaluation:
+    enabled: true
+    save_plots: true
+    save_metrics: true
+
+dashboard:
+  enabled: true
+  host: "localhost"
+  port: 8501
+  auto_refresh: true
+
+reproducibility:
+  ensure_deterministic: true
+  numpy_seed: 42
+  random_seed: 42

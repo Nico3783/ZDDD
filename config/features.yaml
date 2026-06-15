@@ -1,0 +1,80 @@
+flow_features:
+  - " Fwd Packet Length Mean"
+  - " Fwd Packet Length Std"
+  - " Bwd Packet Length Mean"
+  - " Bwd Packet Length Std"
+  - " Flow Duration"
+  - " Total Fwd Packets"
+  - " Total Backward Packets"
+  - " Flow IAT Mean"
+  - " Flow IAT Std"
+  - " Fwd IAT Total"
+  - " Fwd IAT Mean"
+  - " Fwd IAT Std"
+  - " Bwd IAT Total"
+  - " Bwd IAT Mean"
+  - " Bwd IAT Std"
+  - " Avg Fwd Segment Size"
+  - " Avg Bwd Segment Size"
+  - " Subflow Fwd Bytes"
+  - " Subflow Bwd Bytes"
+  - " Subflow Fwd Packets"
+  - " Subflow Bwd Packets"
+  - " Init_Win_bytes_forward"
+  - " Init_Win_bytes_backward"
+  - " Fwd Packets/s"
+  - " Bwd Packets/s"
+  - " Packet Length Mean"
+  - " Packet Length Std"
+  - " Packet Length Variance"
+  - " Down/Up Ratio"
+  - " Average Packet Size"
+
+feature_groups:
+  basic:
+    - " Flow Duration"
+    - " Total Fwd Packets"
+    - " Total Backward Packets"
+    - " Flow IAT Mean"
+    - " Average Packet Size"
+  packet_stats:
+    - " Packet Length Mean"
+    - " Packet Length Std"
+    - " Packet Length Variance"
+    - " Fwd Packet Length Mean"
+    - " Bwd Packet Length Mean"
+  timing:
+    - " Flow IAT Mean"
+    - " Flow IAT Std"
+    - " Fwd IAT Mean"
+    - " Bwd IAT Mean"
+  flags:
+    - " Fwd PSH Flags"
+    - " Bwd PSH Flags"
+    - " Fwd URG Flags"
+    - " Bwd URG Flags"
+    - " FIN Flag Count"
+    - " SYN Flag Count"
+    - " RST Flag Count"
+    - " PSH Flag Count"
+    - " ACK Flag Count"
+    - " URG Flag Count"
+    - " CWE Flag Count"
+    - " ECE Flag Count"
+
+categorical:
+  label_column: " Label"
+  benign_label: "BENIGN"
+  attack_labels:
+    - "DoS Hulk"
+    - "DoS GoldenEye"
+    - "DoS Slowloris"
+    - "DoS Slowhttptest"
+    - "Heartbleed"
+
+transformation:
+  scale_method: "standard"
+  handle_infinite: true
+  handle_nan: true
+  clip_outliers: false
+  outlier_clip_percentile: 99.0

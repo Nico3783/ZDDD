@@ -1,0 +1,42 @@
+data:
+  raw: "data/Wednesday-workingHours.pcap_ISCX.csv"
+  processed: "data/processed/"
+  splits:
+    train: "data/processed/train.csv"
+    val: "data/processed/val.csv"
+    test: "data/processed/test.csv"
+
+models:
+  isolation_forest: "models/isolation_forest.joblib"
+  isolation_forest_metadata: "models/isolation_forest_metadata.joblib"
+  random_forest: "models/random_forest.joblib"
+  random_forest_metadata: "models/random_forest_metadata.joblib"
+  scaler: "models/scaler.joblib"
+  label_encoder: "models/label_encoder.joblib"
+  threshold: "models/threshold.joblib"
+
+results:
+  evaluation: "results/evaluation.json"
+  predictions: "results/predictions.csv"
+  feature_importance: "results/feature_importance.csv"
+  confusion_matrix: "results/confusion_matrix.png"
+  roc_curve: "results/roc_curve.png"
+  latency_plot: "results/latency_plot.png"
+  throughput_plot: "results/throughput_plot.png"
+
+logs:
+  dir: "logs/"
+  app: "logs/app.log"
+  errors: "logs/errors.log"
+  alerts: "logs/alerts.log"
+  streaming: "logs/streaming.log"
+
+alerts:
+  dir: "alerts/"
+  archive: "alerts/archive/"
+
+notebooks:
+  dir: "notebooks/"
+
+scripts:
+  dir: "scripts/"

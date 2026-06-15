@@ -1,0 +1,335 @@
+<mxfile host="65bd71144e">
+    <diagram id="dfd-zero-day-dos" name="Data Flow Diagram">
+        <mxGraphModel dx="1045" dy="566" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Data Flow Diagram — Zero-Day DoS Detection Engine" style="text;html=1;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=#1a1a1a;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="15" width="800" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="subtitle_batch" value="Flow A — Batch Training Path" style="text;html=1;fontSize=14;fontStyle=3;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="65" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="subtitle_realtime" value="Flow B — Real-Time Detection Path" style="text;html=1;fontSize=14;fontStyle=3;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="415" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="ext_cicids" value="CICIDS2017 CSV&#xa;(12 raw capture files)" style="shape=mxgraph.basic.rect;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;shadow=0;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="110" width="150" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_raw" value="data/raw/CICIDS2017/&#xa;12 CSV files" style="shape=mxgraph.basic.rect;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=10;fontFamily=Helvetica;verticalAlign=middle;align=center;container=0;collapsible=0;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="200" width="150" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_raw_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_raw_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry x="0.1" relative="1" as="geometry">
+                        <mxPoint x="60" y="200" as="sourcePoint"/>
+                        <mxPoint x="210" y="200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_raw_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry x="0.1" relative="1" as="geometry">
+                        <mxPoint x="60" y="250" as="sourcePoint"/>
+                        <mxPoint x="210" y="250" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="p_loader" value="DatasetLoader&#xa;Load &amp; parse CSVs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="115" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_validator" value="DataValidator&#xa;Schema &amp; integrity checks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="115" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_profiler" value="DataProfiler&#xa;Feature statistics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="630" y="115" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_splitter" value="DatasetSplitter&#xa;Train / Test / Val split" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="810" y="115" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_iforest" value="IsolationForest&#xa;Trainer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="1030" y="90" width="140" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_rforest" value="RandomForest&#xa;Trainer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="1030" y="160" width="140" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_models_trained" value="models/trained/&#xa;isolation_forest.pkl&#xa;random_forest.pkl&#xa;scaler.pkl&#xa;label_encoder.pkl" style="shape=mxgraph.basic.rect;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=9;fontFamily=Helvetica;verticalAlign=middle;align=center;container=0;collapsible=0;" parent="1" vertex="1">
+                    <mxGeometry x="1250" y="100" width="180" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_models_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="100" as="sourcePoint"/>
+                        <mxPoint x="1430" y="100" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_models_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="210" as="sourcePoint"/>
+                        <mxPoint x="1430" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_a1" value="raw flows" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="ext_cicids" target="p_loader" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_a2" value="loaded data" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_loader" target="p_validator" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_a3" value="cleaned data" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_validator" target="p_profiler" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_a4" value="profiled data" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_profiler" target="p_splitter" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_a5" value="train/test sets" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;" parent="1" source="p_splitter" target="p_iforest" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1000" y="100"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_a6" value="train/test sets" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;curved=1;" parent="1" source="p_splitter" target="p_rforest" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1000" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_a7" value="trained model" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_iforest" target="ds_models_trained" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_a8" value="trained model" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_rforest" target="ds_models_trained" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_a_raw_store" value="store raw CSVs" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=4 4;" parent="1" source="ext_cicids" target="ds_raw" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="135" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sep_line" value="" style="endArrow=none;html=1;strokeColor=#CCCCCC;strokeWidth=1;dashed=1;dashPattern=8 4;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="40" y="400" as="sourcePoint"/>
+                        <mxPoint x="1560" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ext_simulator" value="StreamSimulator&#xa;Synthetic traffic generator" style="shape=mxgraph.basic.rect;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=11;fontStyle=1;fontFamily=Helvetica;verticalAlign=middle;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="440" width="170" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_reader" value="StreamReader&#xa;Parse &amp; normalize" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="550" width="140" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_detector" value="DetectionEngine&#xa;Orchestrate pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="550" width="155" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_anomaly" value="AnomalyDetection&#xa;Isolation Forest inference" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="550" width="170" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_classifier" value="Classification&#xa;Random Forest label" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="550" width="155" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_decision" value="DecisionLogic&#xa;Threshold evaluation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="550" width="155" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_severity" value="SeverityCalc&#xa;Risk scoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="1160" y="550" width="130" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_alertmgr" value="AlertManager&#xa;Generate alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="550" width="130" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="p_dashboard" value="Dashboard&#xa;Visualize results" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=10;fontStyle=1;fontFamily=Helvetica;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="650" width="130" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b1" value="network packets" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="ext_simulator" target="p_reader" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="145" y="535"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_b2" value="raw flows" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_reader" target="p_detector" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b3" value="feature vectors" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_detector" target="p_anomaly" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b4" value="anomaly scores" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_anomaly" target="p_classifier" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b5" value="classified labels" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_classifier" target="p_decision" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b6" value="decision verdicts" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_decision" target="p_severity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b7" value="risk scores" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_severity" target="p_alertmgr" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_b8" value="alerts" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_alertmgr" target="p_dashboard" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_metadata" value="models/metadata/&#xa;thresholds.json&#xa;feature_columns.json" style="shape=mxgraph.basic.rect;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=9;fontFamily=Helvetica;verticalAlign=middle;align=center;container=0;collapsible=0;" parent="1" vertex="1">
+                    <mxGeometry x="1250" y="280" width="180" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_meta_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="280" as="sourcePoint"/>
+                        <mxPoint x="1430" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_meta_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="350" as="sourcePoint"/>
+                        <mxPoint x="1430" y="350" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_config" value="config/&#xa;8 YAML config files&#xa;(settings, logging,&#xa;models, features,&#xa;detection, alerting,&#xa;simulation, system)" style="shape=mxgraph.basic.rect;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=9;fontFamily=Helvetica;verticalAlign=middle;align=center;container=0;collapsible=0;" parent="1" vertex="1">
+                    <mxGeometry x="1250" y="380" width="180" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_config_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="380" as="sourcePoint"/>
+                        <mxPoint x="1430" y="380" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_config_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="480" as="sourcePoint"/>
+                        <mxPoint x="1430" y="480" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_alerts" value="alerts/&#xa;Runtime alert output" style="shape=mxgraph.basic.rect;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=10;fontFamily=Helvetica;verticalAlign=middle;align=center;container=0;collapsible=0;" parent="1" vertex="1">
+                    <mxGeometry x="1350" y="730" width="130" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_alerts_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1350" y="730" as="sourcePoint"/>
+                        <mxPoint x="1480" y="730" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_alerts_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1350" y="775" as="sourcePoint"/>
+                        <mxPoint x="1480" y="775" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_logs" value="logs/&#xa;Runtime log output" style="shape=mxgraph.basic.rect;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;rounded=0;arcSize=0;whiteSpace=wrap;html=1;fontSize=10;fontFamily=Helvetica;verticalAlign=middle;align=center;container=0;collapsible=0;" parent="1" vertex="1">
+                    <mxGeometry x="1250" y="730" width="90" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="ds_logs_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="730" as="sourcePoint"/>
+                        <mxPoint x="1340" y="730" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_logs_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="775" as="sourcePoint"/>
+                        <mxPoint x="1340" y="775" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_rt_models_line_top" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="100" as="sourcePoint"/>
+                        <mxPoint x="1430" y="100" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="ds_rt_models_line_bot" value="" style="endArrow=none;html=1;strokeColor=#d6b656;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1250" y="210" as="sourcePoint"/>
+                        <mxPoint x="1430" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_cfg_detect" value="config params" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=4 4;curved=1;" parent="1" source="ds_config" target="p_detector" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1250" y="577"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_meta_anomaly" value="thresholds" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=4 4;curved=1;" parent="1" source="ds_metadata" target="p_anomaly" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1250" y="577"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_meta_class" value="feature columns" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=4 4;curved=1;" parent="1" source="ds_metadata" target="p_classifier" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1100" y="315"/>
+                            <mxPoint x="1100" y="577"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_models_anomaly" value="trained model" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=4 4;curved=1;" parent="1" source="ds_models_trained" target="p_anomaly" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1100" y="155"/>
+                            <mxPoint x="1100" y="577"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_models_class" value="trained model" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;dashed=1;dashPattern=4 4;curved=1;" parent="1" source="ds_models_trained" target="p_classifier" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1150" y="210"/>
+                            <mxPoint x="1150" y="577"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="flow_alert_store" value="alert records" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_alertmgr" target="ds_alerts" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="flow_log_store" value="log entries" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;fontSize=9;fontStyle=2;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" parent="1" source="p_alertmgr" target="ds_logs" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1295" y="730"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#CCCCCC;strokeWidth=1;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="680" width="450" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_title" value="LEGEND" style="text;html=1;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="65" y="685" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_ext" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="65" y="710" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_ext_label" value="External Entity" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="710" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_proc" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;arcSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="230" y="710" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_proc_label" value="Process" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="265" y="710" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_store" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="710" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_store_label" value="Data Store" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="375" y="710" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_solid" value="" style="endArrow=classic;html=1;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="65" y="755" as="sourcePoint"/>
+                        <mxPoint x="130" y="755" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="legend_solid_label" value="Data Flow" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="135" y="745" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_dashed" value="" style="endArrow=classic;html=1;strokeColor=#999999;strokeWidth=1;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="230" y="755" as="sourcePoint"/>
+                        <mxPoint x="295" y="755" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="legend_dashed_label" value="Config / Parameter Flow" style="text;html=1;fontSize=10;align=left;verticalAlign=middle;fontFamily=Helvetica;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="745" width="155" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

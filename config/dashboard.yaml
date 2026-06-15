@@ -1,0 +1,56 @@
+server:
+  host: "localhost"
+  port: 8501
+  browser_gather_usage_stats: false
+
+pages:
+  metrics:
+    title: "Detection Metrics"
+    icon: "📊"
+    refresh_interval_seconds: 5
+    charts:
+      - "accuracy_over_time"
+      - "precision_recall_over_time"
+      - "f1_over_time"
+      - "fpr_over_time"
+      - "detection_latency"
+      - "throughput"
+      - "confusion_matrix"
+      - "roc_curve"
+  alerts:
+    title: "Alerts"
+    icon: "🚨"
+    refresh_interval_seconds: 3
+    table_page_size: 50
+    max_alerts_display: 500
+    filters:
+      - "severity"
+      - "time_range"
+      - "class"
+  model_insights:
+    title: "Model Insights"
+    icon: "🧠"
+    refresh_interval_seconds: 30
+    sections:
+      - "feature_importance"
+      - "anomaly_score_distribution"
+      - "class_distribution"
+      - "model_performance"
+      - "training_history"
+  streaming:
+    title: "Live Stream"
+    icon: "⚡"
+    refresh_interval_seconds: 2
+    max_points: 200
+    charts:
+      - "anomaly_scores"
+      - "anomaly_rate"
+      - "classification_confidence"
+      - "packets_processed"
+
+theme:
+  primary_color: "#1f77b4"
+  background_color: "#0e1117"
+  secondary_background: "#262730"
+  text_color: "#fafafa"
+  font: "monospace"

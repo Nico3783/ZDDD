@@ -1,0 +1,337 @@
+.
+|-- ARCHITECTURE_DECISIONS.md
+|-- BACKLOG.md
+|-- CHANGELOG.md
+|-- CLAUDE.md
+|-- DEVELOPMENT_GUIDELINES.md
+|-- EXECUTION_STATE.md
+|-- LICENSE
+|-- MEMORY.md
+|-- PROJECT_DOCUMENT.md
+|-- PROJECT_RULES.md
+|-- README.md
+|-- RESEARCH_REFERENCE.md
+|-- alerts
+|   |-- archive
+|   |-- csv
+|   |-- json
+|   `-- reports
+|-- config
+|   |-- alerts.yaml
+|   |-- dashboard.yaml
+|   |-- features.yaml
+|   |-- logging.yaml
+|   |-- models.yaml
+|   |-- paths.yaml
+|   |-- settings.yaml
+|   `-- thresholds.yaml
+|-- data
+|   |-- feature_store
+|   |-- interim
+|   |-- processed
+|   |-- raw
+|   |   |-- cicids2017
+|   |   |-- external
+|   |   `-- unsw_nb15
+|   |-- samples
+|   `-- validation
+|-- deployment
+|   |-- docker
+|   |   |-- Dockerfile
+|   |   `-- docker-compose.yml
+|   |-- monitoring
+|   |   |-- grafana
+|   |   `-- prometheus.yml
+|   `-- systemd
+|       `-- detection-engine.service
+|-- docs
+|   |-- api
+|   |   |-- alert_api.md
+|   |   `-- dashboard_api.md
+|   |-- architecture
+|   |   |-- component_diagram.md
+|   |   |-- data_flow.md
+|   |   |-- deployment_design.md
+|   |   |-- overview.md
+|   |   `-- pipeline_design.md
+|   |-- models
+|   |   |-- feature_selection.md
+|   |   |-- isolation_forest.md
+|   |   |-- model_evaluation.md
+|   |   |-- random_forest.md
+|   |   `-- threshold_strategy.md
+|   |-- project
+|   |   |-- assumptions.md
+|   |   |-- constraints.md
+|   |   |-- objectives.md
+|   |   `-- scope.md
+|   |-- reports
+|   |   |-- evaluation_log.md
+|   |   |-- experiment_log.md
+|   |   |-- findings.md
+|   |   `-- training_log.md
+|   `-- research
+|       |-- attack_taxonomy.md
+|       |-- datasets.md
+|       |-- dos_characteristics.md
+|       |-- literature_summary.md
+|       `-- zero_day_characteristics.md
+|-- logs
+|   |-- alerts
+|   |-- experiments
+|   |-- inference
+|   |-- system
+|   `-- training
+|-- models
+|   |-- checkpoints
+|   |-- evaluation
+|   |-- metadata
+|   |   |-- feature_schema.json
+|   |   |-- model_registry.json
+|   |   `-- thresholds.json
+|   `-- trained
+|       |-- isolation_forest.pkl
+|       |-- label_encoder.pkl
+|       |-- random_forest.pkl
+|       `-- scaler.pkl
+|-- notebooks
+|   |-- 01_dataset_exploration.ipynb
+|   |-- 02_cleaning_analysis.ipynb
+|   |-- 03_feature_engineering.ipynb
+|   |-- 04_isolation_forest_training.ipynb
+|   |-- 05_random_forest_training.ipynb
+|   |-- 06_threshold_optimization.ipynb
+|   |-- 07_pipeline_validation.ipynb
+|   |-- 08_evaluation.ipynb
+|   `-- 09_visualization.ipynb
+|-- pyproject.toml
+|-- results
+|   |-- confusion_matrices
+|   |-- figures
+|   |-- latency_analysis
+|   |-- metrics
+|   |-- reports
+|   |-- roc_curves
+|   `-- throughput_analysis
+|-- scripts
+|   |-- download_dataset.py
+|   |-- evaluate_models.py
+|   |-- generate_report.py
+|   |-- optimize_thresholds.py
+|   |-- preprocess_data.py
+|   |-- run_dashboard.py
+|   |-- run_simulation.py
+|   |-- train_iforest.py
+|   `-- train_random_forest.py
+|-- src
+|   |-- __init__.py
+|   |-- __pycache__
+|   |   `-- __init__.cpython-313.pyc
+|   |-- alerting
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- csv_logger.cpython-313.pyc
+|   |   |   |-- formatter.cpython-313.pyc
+|   |   |   |-- generator.cpython-313.pyc
+|   |   |   |-- json_logger.cpython-313.pyc
+|   |   |   |-- logger.cpython-313.pyc
+|   |   |   `-- notifier.cpython-313.pyc
+|   |   |-- csv_logger.py
+|   |   |-- formatter.py
+|   |   |-- generator.py
+|   |   |-- json_logger.py
+|   |   |-- logger.py
+|   |   `-- notifier.py
+|   |-- anomaly_detection
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- evaluator.cpython-313.pyc
+|   |   |   |-- inference.cpython-313.pyc
+|   |   |   |-- isolation_forest.cpython-313.pyc
+|   |   |   |-- predict.cpython-313.pyc
+|   |   |   |-- threshold.cpython-313.pyc
+|   |   |   |-- train.cpython-313.pyc
+|   |   |   `-- trainer.cpython-313.pyc
+|   |   |-- evaluator.py
+|   |   |-- inference.py
+|   |   |-- isolation_forest.py
+|   |   |-- threshold.py
+|   |   `-- trainer.py
+|   |-- classification
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- evaluator.cpython-313.pyc
+|   |   |   |-- importance.cpython-313.pyc
+|   |   |   |-- inference.cpython-313.pyc
+|   |   |   |-- predict.cpython-313.pyc
+|   |   |   |-- random_forest.cpython-313.pyc
+|   |   |   |-- train.cpython-313.pyc
+|   |   |   `-- trainer.cpython-313.pyc
+|   |   |-- evaluator.py
+|   |   |-- importance.py
+|   |   |-- inference.py
+|   |   |-- random_forest.py
+|   |   `-- trainer.py
+|   |-- core
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- config.cpython-313.pyc
+|   |   |   |-- constants.cpython-313.pyc
+|   |   |   |-- exceptions.cpython-313.pyc
+|   |   |   `-- logger.cpython-313.pyc
+|   |   |-- config.py
+|   |   |-- constants.py
+|   |   |-- exceptions.py
+|   |   `-- logger.py
+|   |-- dashboard
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- app.cpython-313.pyc
+|   |   |   `-- metrics.cpython-313.pyc
+|   |   |-- app.py
+|   |   |-- components
+|   |   |   |-- __pycache__
+|   |   |   |   |-- cards.cpython-313.pyc
+|   |   |   |   |-- charts.cpython-313.pyc
+|   |   |   |   `-- tables.cpython-313.pyc
+|   |   |   |-- cards.py
+|   |   |   |-- charts.py
+|   |   |   `-- tables.py
+|   |   |-- metrics.py
+|   |   `-- pages
+|   |       |-- __pycache__
+|   |       |   |-- alerts.cpython-313.pyc
+|   |       |   |-- metrics.cpython-313.pyc
+|   |       |   |-- models.cpython-313.pyc
+|   |       |   `-- overview.cpython-313.pyc
+|   |       |-- alerts.py
+|   |       |-- metrics.py
+|   |       |-- models.py
+|   |       `-- overview.py
+|   |-- datasets
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- loader.cpython-313.pyc
+|   |   |   |-- profiler.cpython-313.pyc
+|   |   |   |-- split.cpython-313.pyc
+|   |   |   |-- splitter.cpython-313.pyc
+|   |   |   |-- validation.cpython-313.pyc
+|   |   |   `-- validator.cpython-313.pyc
+|   |   |-- loader.py
+|   |   |-- profiler.py
+|   |   |-- splitter.py
+|   |   `-- validator.py
+|   |-- detection_engine
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- alert_manager.cpython-313.pyc
+|   |   |   |-- decision_logic.cpython-313.pyc
+|   |   |   |-- engine.cpython-313.pyc
+|   |   |   |-- orchestrator.cpython-313.pyc
+|   |   |   |-- response_handler.cpython-313.pyc
+|   |   |   `-- severity.cpython-313.pyc
+|   |   |-- alert_manager.py
+|   |   |-- decision_logic.py
+|   |   |-- engine.py
+|   |   |-- orchestrator.py
+|   |   |-- response_handler.py
+|   |   `-- severity.py
+|   |-- evaluation
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- confusion.cpython-313.pyc
+|   |   |   |-- latency.cpython-313.pyc
+|   |   |   |-- metrics.cpython-313.pyc
+|   |   |   |-- reports.cpython-313.pyc
+|   |   |   |-- roc.cpython-313.pyc
+|   |   |   `-- throughput.cpython-313.pyc
+|   |   |-- confusion.py
+|   |   |-- latency.py
+|   |   |-- metrics.py
+|   |   |-- reports.py
+|   |   |-- roc.py
+|   |   `-- throughput.py
+|   |-- features
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- engineering.cpython-313.pyc
+|   |   |   |-- extractor.cpython-313.pyc
+|   |   |   |-- importance.cpython-313.pyc
+|   |   |   |-- schema.cpython-313.pyc
+|   |   |   |-- selector.cpython-313.pyc
+|   |   |   `-- transformer.cpython-313.pyc
+|   |   |-- engineering.py
+|   |   |-- extractor.py
+|   |   |-- importance.py
+|   |   |-- schema.py
+|   |   |-- selector.py
+|   |   `-- transformer.py
+|   |-- preprocessing
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- cleaner.cpython-313.pyc
+|   |   |   |-- encoder.cpython-313.pyc
+|   |   |   |-- imputer.cpython-313.pyc
+|   |   |   |-- pipeline.cpython-313.pyc
+|   |   |   `-- scaler.cpython-313.pyc
+|   |   |-- cleaner.py
+|   |   |-- encoder.py
+|   |   |-- imputer.py
+|   |   |-- pipeline.py
+|   |   `-- scaler.py
+|   |-- streaming
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |   |-- __init__.cpython-313.pyc
+|   |   |   |-- dispatcher.cpython-313.pyc
+|   |   |   |-- microbatch.cpython-313.pyc
+|   |   |   |-- scheduler.cpython-313.pyc
+|   |   |   |-- simulator.cpython-313.pyc
+|   |   |   |-- stream_reader.cpython-313.pyc
+|   |   |   `-- streamer.cpython-313.pyc
+|   |   |-- dispatcher.py
+|   |   |-- microbatch.py
+|   |   |-- scheduler.py
+|   |   |-- simulator.py
+|   |   |-- stream_reader.py
+|   |   `-- streamer.py
+|   `-- utils
+|       |-- __init__.py
+|       |-- __pycache__
+|       |   |-- __init__.cpython-313.pyc
+|       |   |-- file_utils.cpython-313.pyc
+|       |   |-- model_utils.cpython-313.pyc
+|       |   |-- time_utils.cpython-313.pyc
+|       |   `-- validation_utils.cpython-313.pyc
+|       |-- file_utils.py
+|       |-- model_utils.py
+|       |-- time_utils.py
+|       `-- validation_utils.py
+|-- structure.txt
+`-- tests
+    |-- integration
+    |   |-- test_engine.py
+    |   |-- test_pipeline.py
+    |   `-- test_streaming.py
+    |-- system
+    |   |-- test_end_to_end.py
+    |   `-- test_realtime_flow.py
+    `-- unit
+        |-- test_alerts.py
+        |-- test_cleaner.py
+        |-- test_features.py
+        |-- test_iforest.py
+        |-- test_loader.py
+        `-- test_rf.py
+
+84 directories, 251 files

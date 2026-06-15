@@ -1,0 +1,45 @@
+anomaly_detection:
+  contamination: 0.1
+  score_threshold_percentile: 95.0
+  min_anomaly_score: 0.0
+  max_anomaly_score: 1.0
+
+classification:
+  decision_threshold: 0.5
+  optimize_threshold: true
+  optimization_metric: "f1"
+
+alerting:
+  severity_levels:
+    critical:
+      min_score: 0.9
+      color: "red"
+      notify: true
+    high:
+      min_score: 0.7
+      color: "orange"
+      notify: true
+    medium:
+      min_score: 0.5
+      color: "yellow"
+      notify: false
+    low:
+      min_score: 0.3
+      color: "blue"
+      notify: false
+  minimum_confidence: 0.5
+  cooldown_seconds: 10
+  batch_alerts: true
+  max_alerts_per_minute: 60
+
+streaming:
+  anomaly_rate_warning_threshold: 5.0
+  anomaly_rate_critical_threshold: 20.0
+  window_size_seconds: 60
+
+evaluation:
+  acceptable_fpr: 0.05
+  acceptable_latency_ms: 100.0
+  minimum_throughput: 1000
+  minimum_accuracy: 0.95
+  minimum_f1: 0.90

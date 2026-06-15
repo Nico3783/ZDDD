@@ -1,0 +1,73 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.so
+
+# Data - raw datasets (large files)
+data/raw/**/*.csv
+data/raw/**/*.pcap
+data/raw/**/*.json
+!data/raw/cicids2017/.gitkeep
+
+# Data - processed (regeneratable)
+data/processed/**/*.pkl
+data/processed/**/*.csv
+data/processed/**/*.joblib
+!data/processed/.gitkeep
+
+# Trained models (large, regeneratable)
+models/trained/*.pkl
+models/trained/*.joblib
+models/trained/*.pt
+models/trained/*.pth
+models/trained/*.onnx
+!models/trained/.gitkeep
+
+# Reports and logs
+reports/*.json
+reports/*.html
+reports/*.csv
+logs/*.log
+logs/*.txt
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# pytest
+.coverage
+.coverage.*
+htmlcov/
+
+# mypy
+.mypy_cache/
+
+# ruff
+.ruff_cache/

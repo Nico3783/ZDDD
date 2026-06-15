@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-06-12T00:00:00.000Z" agent="drawio" version="21.0.0" type="device">
+  <diagram id="ml-pipeline" name="ML Training Pipeline">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="ML Training Pipeline — Zero-Day DoS Detection" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="500" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Legend Container -->
+        <mxCell id="legend" value="" style="swimlane;startSize=25;fillColor=#f5f5f5;strokeColor=#666666;rounded=1;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="20" width="200" height="250" as="geometry" />
+          <mxCell id="legend_title" value="Legend" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="0" width="50" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg1" value="Data Ingestion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="35" width="180" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg2" value="Preprocessing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="65" width="180" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg3" value="Train/Test Split" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="95" width="180" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg4" value="Anomaly Detection Path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="125" width="180" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg5" value="Classification Path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="155" width="180" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg6" value="Evaluation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="185" width="180" height="25" as="geometry" />
+          </mxCell>
+          <mxCell id="leg7" value="Persistence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;spacingLeft=5;" vertex="1" parent="legend">
+            <mxGeometry x="10" y="215" width="180" height="25" as="geometry" />
+          </mxCell>
+        </mxCell>
+
+        <!-- ==================== STAGE 1: DATA INGESTION ==================== -->
+        <mxCell id="ingestion" value="Data Ingestion&#xa;&#xa;CICIDS2017 CSV&#xa;(Wednesday working hours)&#xa;&#xa;2,257,463 flow records&#xa;80+ raw features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=0;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="90" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Ingestion to Cleaning -->
+        <mxCell id="arrow1" value="raw features" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="ingestion" target="cleaning" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== STAGE 2: DATA CLEANING ==================== -->
+        <mxCell id="cleaning" value="Data Cleaning&#xa;src/preprocessing/cleaner.py&#xa;&#xa;• Drop duplicates&#xa;• Remove NaN/inf values&#xa;• Standardize labels&#xa;  (strip whitespace)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="270" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Cleaning to Encoding -->
+        <mxCell id="arrow2" value="cleaned data" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="cleaning" target="encoding" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== STAGE 3: LABEL ENCODING ==================== -->
+        <mxCell id="encoding" value="Label Encoding&#xa;src/preprocessing/encoder.py&#xa;&#xa;• Map attack names to integers&#xa;• Classes: BENIGN, DoS Hulk,&#xa;  DoS GoldenEye, DoS Slowloris,&#xa;  DoS Slowhttptest, Heartbleed, etc." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="460" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Encoding to Scaling -->
+        <mxCell id="arrow3" value="encoded labels + features" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="encoding" target="scaling" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== STAGE 4: FEATURE SCALING ==================== -->
+        <mxCell id="scaling" value="Feature Scaling&#xa;src/preprocessing/scaler.py&#xa;&#xa;• StandardScaler&#xa;  (zero mean, unit variance)&#xa;• 30 selected flow-based features" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="650" width="220" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Scaling to Split -->
+        <mxCell id="arrow4" value="scaled features" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="scaling" target="split" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== STAGE 5: TRAIN/TEST SPLIT ==================== -->
+        <mxCell id="split" value="Train/Test Split&#xa;src/datasets/splitter.py&#xa;&#xa;80/20 split, stratified&#xa;Random state = 42" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="820" width="220" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Split to Path A -->
+        <mxCell id="arrow5a" value="X_train, X_test" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="split" target="pathA_container" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="870" />
+              <mxPoint x="350" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Arrow: Split to Path B -->
+        <mxCell id="arrow5b" value="X_train, X_test, y_train, y_test" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="split" target="pathB_container" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="870" />
+              <mxPoint x="750" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== PATH A CONTAINER: ANOMALY DETECTION ==================== -->
+        <mxCell id="pathA_container" value="Path A — Anomaly Detection (Unsupervised)" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;fontStyle=1;fontSize=12;swimlaneLine=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="930" width="530" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Path A: Isolation Forest -->
+        <mxCell id="iso_forest" value="Isolation Forest&#xa;src/anomaly_detection/isolation_forest.py&#xa;&#xa;Contamination = 0.1&#xa;n_estimators = 100&#xa;Unsupervised (no labels needed)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="pathA_container">
+          <mxGeometry x="20" y="40" width="250" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Path A: Anomaly Output -->
+        <mxCell id="anomaly_output" value="Anomaly Detection Output&#xa;&#xa;• Anomaly scores&#xa;• Binary anomaly labels&#xa;  (normal vs. anomalous)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="pathA_container">
+          <mxGeometry x="300" y="40" width="210" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Isolation Forest to Anomaly Output -->
+        <mxCell id="arrow_pa1" value="scores" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="iso_forest" target="anomaly_output" parent="pathA_container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from Path A to Evaluation -->
+        <mxCell id="arrow_pa2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="pathA_container" target="evaluation" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="345" y="1090" />
+              <mxPoint x="345" y="1140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== PATH B CONTAINER: ATTACK CLASSIFICATION ==================== -->
+        <mxCell id="pathB_container" value="Path B — Attack Classification (Supervised)" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;fontStyle=1;fontSize=12;swimlaneLine=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="930" width="530" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- Path B: Random Forest -->
+        <mxCell id="rand_forest" value="Random Forest&#xa;src/classification/random_forest.py&#xa;&#xa;n_estimators = 100&#xa;class_weight = 'balanced'&#xa;Supervised (needs labels)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="pathB_container">
+          <mxGeometry x="20" y="40" width="250" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Path B: Classification Output -->
+        <mxCell id="classification_output" value="Classification Output&#xa;&#xa;• Attack type predictions&#xa;• Confidence scores&#xa;• Per-class probabilities" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="pathB_container">
+          <mxGeometry x="300" y="40" width="210" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Random Forest to Classification Output -->
+        <mxCell id="arrow_pb1" value="predictions" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="rand_forest" target="classification_output" parent="pathB_container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from Path B to Evaluation -->
+        <mxCell id="arrow_pb2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="pathB_container" target="evaluation" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="905" y="1090" />
+              <mxPoint x="905" y="1140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ==================== STAGE 7: MODEL EVALUATION ==================== -->
+        <mxCell id="evaluation" value="Model Evaluation&#xa;src/evaluation/metrics.py&#xa;&#xa;• Accuracy, Precision, Recall, F1&#xa;• ROC-AUC&#xa;• Confusion matrix&#xa;• Per-class metrics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="1140" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Evaluation to Persistence -->
+        <mxCell id="arrow6" value="trained models + metrics" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=9;fontColor=#666666;" edge="1" source="evaluation" target="persistence" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ==================== STAGE 8: MODEL PERSISTENCE ==================== -->
+        <mxCell id="persistence" value="Model Persistence&#xa;&#xa;models/trained/isolation_forest.pkl&#xa;models/trained/random_forest.pkl&#xa;models/trained/scaler.pkl&#xa;models/trained/label_encoder.pkl&#xa;models/metadata/thresholds.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=center;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="450" y="1330" width="220" height="140" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

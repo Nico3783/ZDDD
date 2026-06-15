@@ -1,0 +1,304 @@
+<mxfile host="65bd71144e">
+    <diagram id="sys-arch" name="System Architecture">
+        <mxGraphModel dx="1150" dy="809" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" background="light-dark(#FFFFFF,#121212)" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="&lt;b&gt;Zero-Day DoS Detection Engine — System Architecture&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=18;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="10" width="480" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_data" value="Data Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="50" width="440" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="csv_box" value="&lt;b&gt;CICIDS2017&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;CSV Dataset Files&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;fontSize=11;" parent="lane_data" vertex="1">
+                    <mxGeometry y="28" width="140" height="102" as="geometry"/>
+                </mxCell>
+                <mxCell id="csv_src" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaQ" parent="lane_data" vertex="1">
+                    <mxGeometry x="140" y="28" width="100" height="102" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_datasets" value="&lt;b&gt;datasets/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;loader · validator · profiler · splitter&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;fontSize=11;" parent="lane_data" vertex="1">
+                    <mxGeometry x="240" y="28" width="200" height="102" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_csv_ds" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_data" source="csv_box" target="mod_datasets" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_preproc" value="Preprocessing Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="190" width="1360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_preproc" value="&lt;b&gt;preprocessing/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;cleaner · encoder · scaler · imputer · pipeline&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;fontSize=11;" parent="lane_preproc" vertex="1">
+                    <mxGeometry x="20" y="35" width="280" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_features" value="&lt;b&gt;features/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;selector · transformer · schema · extractor · engineering · importance&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;fontSize=11;" parent="lane_preproc" vertex="1">
+                    <mxGeometry x="340" y="35" width="380" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_preproc_feat" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_preproc" source="mod_preproc" target="mod_features" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_ds_preproc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_datasets" target="mod_preproc" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_ml" value="ML Models Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="330" width="1360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_anomaly" value="&lt;b&gt;anomaly_detection/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;isolation_forest · trainer · inference · threshold · evaluator&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_ml" vertex="1">
+                    <mxGeometry x="20" y="35" width="340" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_classify" value="&lt;b&gt;classification/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;random_forest · trainer · inference · importance · evaluator&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_ml" vertex="1">
+                    <mxGeometry x="400" y="35" width="340" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_anomaly_class" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=2;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_ml" source="mod_anomaly" target="mod_classify" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_feat_anomaly" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_features" target="mod_anomaly" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_feat_class" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_features" target="mod_classify" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="730" y="310"/>
+                            <mxPoint x="570" y="310"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lane_detect" value="Detection Engine Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="470" width="1360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_orchestrator" value="&lt;b&gt;orchestrator&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Central coordination&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=11;" parent="lane_detect" vertex="1">
+                    <mxGeometry x="20" y="35" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_engine" value="&lt;b&gt;engine&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Core detection logic&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=11;" parent="lane_detect" vertex="1">
+                    <mxGeometry x="210" y="35" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_decision" value="&lt;b&gt;decision_logic&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Threshold decisions&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=11;" parent="lane_detect" vertex="1">
+                    <mxGeometry x="400" y="35" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_severity" value="&lt;b&gt;severity&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Alert classification&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=11;" parent="lane_detect" vertex="1">
+                    <mxGeometry x="590" y="35" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_alertmgr" value="&lt;b&gt;alert_manager&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Alert lifecycle&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=11;" parent="lane_detect" vertex="1">
+                    <mxGeometry x="780" y="35" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_response" value="&lt;b&gt;response_handler&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Automated response&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=11;" parent="lane_detect" vertex="1">
+                    <mxGeometry x="970" y="35" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_orch_engine" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_detect" source="mod_orchestrator" target="mod_engine" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_engine_decision" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_detect" source="mod_engine" target="mod_decision" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_decision_sev" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_detect" source="mod_decision" target="mod_severity" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_sev_alertmgr" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_detect" source="mod_severity" target="mod_alertmgr" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_alertmgr_resp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_detect" source="mod_alertmgr" target="mod_response" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_anomaly_detect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_anomaly" target="mod_orchestrator" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_class_detect" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b85450;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_classify" target="mod_engine" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_stream" value="Streaming Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="610" width="1360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_simulator" value="&lt;b&gt;simulator&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Traffic simulation&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Helvetica;fontSize=11;" parent="lane_stream" vertex="1">
+                    <mxGeometry x="20" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_scheduler" value="&lt;b&gt;scheduler&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Job scheduling&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Helvetica;fontSize=11;" parent="lane_stream" vertex="1">
+                    <mxGeometry x="190" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_streamer" value="&lt;b&gt;streamer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Real-time streaming&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Helvetica;fontSize=11;" parent="lane_stream" vertex="1">
+                    <mxGeometry x="360" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_dispatcher" value="&lt;b&gt;dispatcher&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Event routing&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Helvetica;fontSize=11;" parent="lane_stream" vertex="1">
+                    <mxGeometry x="530" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_microbatch" value="&lt;b&gt;microbatch&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Batch processing&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Helvetica;fontSize=11;" parent="lane_stream" vertex="1">
+                    <mxGeometry x="700" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_reader" value="&lt;b&gt;stream_reader&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Input ingestion&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Helvetica;fontSize=11;" parent="lane_stream" vertex="1">
+                    <mxGeometry x="870" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_sim_sched" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_stream" source="mod_simulator" target="mod_scheduler" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_sched_stream" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_stream" source="mod_scheduler" target="mod_streamer" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_stream_dispatch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_stream" source="mod_streamer" target="mod_dispatcher" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_dispatch_batch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_stream" source="mod_dispatcher" target="mod_microbatch" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_batch_reader" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_stream" source="mod_microbatch" target="mod_reader" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_detect_stream" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_response" target="mod_simulator" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lane_alert" value="Alerting Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="750" width="1360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_alogger" value="&lt;b&gt;logger&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Alert logging&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_alert" vertex="1">
+                    <mxGeometry x="20" y="35" width="130" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_formatter" value="&lt;b&gt;formatter&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Alert formatting&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_alert" vertex="1">
+                    <mxGeometry x="170" y="35" width="130" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_generator" value="&lt;b&gt;generator&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Alert creation&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_alert" vertex="1">
+                    <mxGeometry x="320" y="35" width="130" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_notifier" value="&lt;b&gt;notifier&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Notification dispatch&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_alert" vertex="1">
+                    <mxGeometry x="470" y="35" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_jsonlog" value="&lt;b&gt;json_logger&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;JSON output&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_alert" vertex="1">
+                    <mxGeometry x="640" y="35" width="130" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_csvlog" value="&lt;b&gt;csv_logger&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;CSV output&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Helvetica;fontSize=11;" parent="lane_alert" vertex="1">
+                    <mxGeometry x="790" y="35" width="130" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_gen_fmt" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_alert" source="mod_generator" target="mod_formatter" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_fmt_log" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=1.5;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_alert" source="mod_formatter" target="mod_alogger" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_fmt_notif" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_alert" source="mod_formatter" target="mod_notifier" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_notif_json" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_alert" source="mod_notifier" target="mod_jsonlog" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_json_csv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="lane_alert" source="mod_jsonlog" target="mod_csvlog" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_detect_alert" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_alertmgr" target="mod_generator" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="890" y="740"/>
+                            <mxPoint x="389" y="740"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lane_present" value="Presentation Layer" style="swimlane;startSize=28;fontFamily=Helvetica;fontSize=12;fontStyle=1;fillColor=#e6f3ff;strokeColor=#6c8ebf;horizontal=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;collapsible=0;rounded=1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="890" width="1360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_dashboard" value="&lt;b&gt;dashboard/metrics&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Streamlit real-time dashboard&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e6f3ff;strokeColor=#6c8ebf;fontFamily=Helvetica;fontSize=11;" parent="lane_present" vertex="1">
+                    <mxGeometry x="20" y="35" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_alert_dash" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_alogger" target="mod_dashboard" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_eval_dash" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" parent="1" source="mod_eval_metrics" target="mod_dashboard" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1220" y="730"/>
+                            <mxPoint x="204" y="730"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="mod_eval" value="&lt;b&gt;evaluation/&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=11;fontStyle=1;verticalAlign=top;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="350" width="280" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_eval_metrics" value="&lt;b&gt;metrics · reports · confusion · roc&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;latency · throughput&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="395" width="280" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_class_eval" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=1.5;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="mod_classify" target="mod_eval_metrics" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="770" y="430"/>
+                            <mxPoint x="1070" y="430"/>
+                            <mxPoint x="1070" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow_anom_eval" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=1.5;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="mod_anomaly" target="mod_eval_metrics" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="390" y="450"/>
+                            <mxPoint x="1050" y="450"/>
+                            <mxPoint x="1050" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="mod_core" value="&lt;b&gt;core/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;config · constants · exceptions · logger&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#999999;fontFamily=Helvetica;fontSize=10;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="80" width="280" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="mod_utils" value="&lt;b&gt;utils/&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;data_utils · file_utils · validation_utils&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f5f5f5;strokeColor=#999999;fontFamily=Helvetica;fontSize=10;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="150" width="280" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#cccccc;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="1120" y="770" width="250" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend_title" value="&lt;b&gt;Legend&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="1130" y="775" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#dae8fc;strokeColor=#6c8ebf;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="805" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg1t" value="Data Layer" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="803" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#d5e8d4;strokeColor=#82b366;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="830" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg2t" value="Preprocessing" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="828" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="855" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg3t" value="ML Models" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="853" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#f8cecc;strokeColor=#b85450;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="880" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg4t" value="Detection Engine" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="878" width="100" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg5" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e1d5e7;strokeColor=#9673a6;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="905" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg5t" value="Streaming" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="903" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg6" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fff2cc;strokeColor=#d6b656;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="930" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg6t" value="Alerting" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="928" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg7" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#e6f3ff;strokeColor=#6c8ebf;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1135" y="955" width="16" height="16" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg7t" value="Presentation" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="953" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg8" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1135" y="985" as="sourcePoint"/>
+                        <mxPoint x="1155" y="985" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="leg8t" value="Data flow" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="975" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg9" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;dashed=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1135" y="1005" as="sourcePoint"/>
+                        <mxPoint x="1155" y="1005" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="leg9t" value="Feedback / evaluation" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1158" y="995" width="110" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
